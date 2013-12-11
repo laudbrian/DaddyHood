@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet/less" href="{{ STATIC_URL }}style.less">
+    <script src="{{ STATIC_URL }}less.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <img src="{{ STATIC_URL }}gfx/dlogo.png">
+            <span>do you live it?</span>
+            {% block login %}
+            <a href="/">Home</a>
+            <a href="/users/">DH users</a>
+            <a href="/users/{{ username }}">My Profile</a>
+            <a href="/notes">Public Notes</a>
+            <a href="/contact">Need Help!</a>
+            <a href="/map">What's around you?</a> 
+            <form action="/logout">
+                <input type="submit" id="btnLogOut" value="Log Out">
+            </form>
+            {% endblock %}
+        </div>
+    </header>
+    <div id="content">
+        <div class="wrapper">
+            {% block flash %}
+            {% if auth_form.non_field_errors or user_form.non_field_errors or ribbit_form.errors %}
+            <div class="flash error">
+                {{ auth_form.non_field_errors }}
+                {{ user_form.non_field_errors }}
+                {{ daddy_form.content.errors }}
+            </div>
+            {% endif %}
+            {% if notice %}
+            <div class="flash notice">
+                {{ notice }}
+            </div>
+            {% endif %}
+            {% endblock %}
+
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+    <footer>
+        <div class="wrapper">
+            DaddyHood - The only resource you need
+            <a href="http://rocket-space.com/rocketu/">
+                <img src="{{ STATIC_URL }}gfx/duck.png">
+            </a>
+            <a href="http://www.djangoproject.com/">
+                <img src="https://www.djangoproject.com/s/img/badges/djangomade124x25_grey.gif"  border="0" alt="Made with Django." title="Made with Django." />
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

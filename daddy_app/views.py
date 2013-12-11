@@ -4,11 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
-from daddy_app.forms import AuthenticateForm, UserCreateForm, NoteForm
+from daddy_app.forms import AuthenticateForm, UserCreateForm, NoteForm, ContactForm
 from daddy_app.models import Note
-
-
 
 
 def index(request, auth_form=None, user_form=None):
@@ -135,3 +134,21 @@ def follow(request):
             except ObjectDoesNotExist:
                 return redirect('/users/')
     return redirect('/users/')
+
+
+def contact(request):
+    if request.method == 'POST': # If the form has been submitted...
+        form = ContactForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            # ...
+            return HttpResponseRedirect('/thanks/') # Redirect after POST
+    else:
+        form = ContactForm() # An unbound form
+
+    return render(request, 'contact.html', {
+        'form': form,
+    })
+
+def show_map(request):
+    return render(request, 'map.html', {})

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from daddy_app.forms import AuthenticateForm, UserCreateForm, NoteForm
 from daddy_app.models import Note
@@ -61,4 +62,29 @@ def signup(request):
             return redirect('/')
         else:
             return index(request, user_form=user_form)
+    return redirect('/')
+
+ 
+@login_required
+def public(request, note_form=None):
+    note_form = note_form or NoteForm()
+    notes = Note.objects.reverse()[:10]
+    return render(request,
+                  'public.html',
+                  {'note_form': note_form, 'next_url': '/notes',
+                   'notes': notes, 'username': request.user.username})
+
+
+@login_required
+def submit(request):
+    if request.method == "POST":
+        note_form = NoteForm(data=request.POST)
+        next_url = request.POST.get("next_url", "/")
+        if note_form.is_valid():
+            note = note_form.save(commit=False)
+            note.user = request.user
+            note.save()
+            return redirect(next_url)
+        else:
+            return public(request, note_form)
     return redirect('/')

@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Count
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 from daddy_app.forms import AuthenticateForm, UserCreateForm, NoteForm
 from daddy_app.models import Note
 
@@ -88,3 +91,47 @@ def submit(request):
         else:
             return public(request, note_form)
     return redirect('/')
+
+
+def get_latest(user):
+    try:
+        return user.note_set.order_by('-id')[0]
+    except IndexError:
+        return ""
+
+
+@login_required
+def users(request, username="", note_form=None):
+    if username:
+        # Show a profile
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise Http404
+        notes = Note.objects.filter(user=user.id)
+        if username == request.user.username or request.user.profile.follows.filter(user__username=username):
+            # Self Profile or buddies' profile
+            return render(request, 'user.html', {'user': user, 'notes': notes, })
+        return render(request, 'user.html', {'user': user, 'notes': notes, 'follow': True, })
+    users = User.objects.all().annotate(note_count=Count('note'))
+    notes = map(get_latest, users)
+    obj = zip(users, notes)
+    note_form = note_form or NoteForm()
+    return render(request,
+                  'profiles.html',
+                  {'obj': obj, 'next_url': '/users/',
+                   'note_form': note_form,
+                   'username': request.user.username, })
+
+
+@login_required
+def follow(request):
+    if request.method == "POST":
+        follow_id = request.POST.get('follow', False)
+        if follow_id:
+            try:
+                user = User.objects.get(id=follow_id)
+                request.user.profile.follows.add(user.profile)
+            except ObjectDoesNotExist:
+                return redirect('/users/')
+    return redirect('/users/')

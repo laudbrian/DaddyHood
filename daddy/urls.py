@@ -11,7 +11,10 @@ urlpatterns = patterns('',
     url(r'^signup$', 'daddy_app.views.signup'), # signup
     url(r'^notes$', 'daddy_app.views.public'), # public notes
     url(r'^submit$', 'daddy_app.views.submit'), # submit new note
-    
+    url(r'^users/$', 'daddy_app.views.users'),
+    url(r'^users/(?P<username>\w{0,30})/$', 'daddy_app.views.users'),
+    url(r'^follow$', 'daddy_app.views.follow'),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

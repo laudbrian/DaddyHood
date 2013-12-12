@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet/less" href="{{ STATIC_URL }}style.less">
+    <script src="{{ STATIC_URL }}less.js"></script>
+</head>
+    <header>
+        <div class="wrapper">
+            <img src="{{ STATIC_URL }}gfx/dlogo.png">
+            <span>do you live it?</span>
+            {% block login %}
+            <a href="/">Home</a>
+            <a href="/users/">Public Dads</a>
+            <a href="/users/{{ username }}">My Profile</a>
+            <a href="/notes">Public Notes</a>
+            <form action="/logout">
+                <input type="submit" id="btnLogOut" value="Log Out">
+            </form>
+            {% endblock %}
+        </div>
+    </header>
+<body>
+<center><h3>Once you submit your request, the next available DaddyHood associate will respond ASAP!</h3>
+<form action="/contact/" method="post">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form></center>
+</body>
+</html>

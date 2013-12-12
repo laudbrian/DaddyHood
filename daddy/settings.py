@@ -53,7 +53,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'daddy_app',
+    'sendgrid',
 )
+
+SENDGRID_EMAIL_HOST = "smtp.sendgrid.net"
+SENDGRID_EMAIL_PORT = 587
+SENDGRID_EMAIL_USERNAME = "info@daddy-app.com"
+SENDGRID_EMAIL_PASSWORD = "lalakers"
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

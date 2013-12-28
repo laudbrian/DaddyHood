@@ -103,7 +103,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.weibo',
     'south',
     'daddy_app',
-    'pytz',
+    'boto',
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -171,3 +171,11 @@ STATICFILES_FINDERS = (
     #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 
 )
+
+# Set Django's database settings to Heroku's environment variable DATABASE_URL or
+# default to Sqlite if unable to find
+import os
+import dj_database_url
+basedir = os.path.abspath(os.path.dirname(__file__))
+DATABASES['default'] = dj_database_url.config(default=os.environ.get(
+    "DATABASE_URL", "sqlite:///" + os.path.join(basedir, "database.db")))

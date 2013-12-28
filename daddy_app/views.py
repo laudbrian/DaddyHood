@@ -10,6 +10,8 @@ from daddy_app.forms import AuthenticateForm, UserCreateForm, NoteForm, ContactF
 from daddy_app.models import Note
 
 
+
+
 def index(request, auth_form=None, user_form=None):
     # User is logged in
     if request.user.is_authenticated():
@@ -135,14 +137,35 @@ def follow(request):
                 return redirect('/users/')
     return redirect('/users/')
 
+"""
+def contact(request):
+    if request.method == 'POST': # If the form has been submitted...
+        form = ContactForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            recipients = ['laudbrian@gmail.com']
 
+            send_mail(subject, message, sender, recipients)
+            return HttpResponseRedirect('/thanks/') # Redirect after POST
+    else:
+        form = ContactForm() # An unbound form
+    return render(request,'base_contact.html', {
+        'form': form,
+    })
+
+"""
 def contact(request):
     if request.method == 'POST': # If the form has been submitted...
         form = ContactForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             # ...
-            return HttpResponseRedirect('/thanks/') # Redirect after POST
+
+
+            return HttpResponseRedirect('/map/') # Redirect after POST
     else:
         form = ContactForm() # An unbound form
 
@@ -150,5 +173,12 @@ def contact(request):
         'form': form,
     })
 
+
 def show_map(request):
     return render(request, 'map.html', {})
+
+def show_mappoi(request):
+    return render(request, 'mappoi.html', {})
+
+
+

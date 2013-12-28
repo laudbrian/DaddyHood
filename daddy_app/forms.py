@@ -5,6 +5,8 @@ from django.utils.html import strip_tags
 from daddy_app.models import Note
 
 
+
+
 class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': 'Email'}))
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': 'First Name'}))
@@ -63,3 +65,4 @@ class ContactForm(forms.Form):
         css = {
             'all': ('style.less',)
         }
+

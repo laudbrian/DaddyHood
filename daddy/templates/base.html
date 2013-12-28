@@ -1,21 +1,58 @@
+{% load url from future %}
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-    <link rel="stylesheet/less" href="{{ STATIC_URL }}style.less">
-    <script src="{{ STATIC_URL }}less.js"></script>
+
+<!-- ALLAUTH -->
+<title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+
+
+<!-- Basic Page Needs
+================================================== -->
+<meta charset="utf-8">
+<title>Daddy Hood</title>
+<meta name="description" content="Social Networking for Fathers">
+<meta name="author" content="Brian Lau">
+
+<!-- LESS & CSS
+================================================== -->
+<link rel="stylesheet/less" href="/static/style.less">
+
+
+<!-- Javascript
+================================================== --> 
+    
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery-1.10.2.min.js"></script>
+<script src="/static/less.js"></script>
+
+{% block js_files %}
+{% endblock %}
+
+
 </head>
+
 <body>
+
     <header>
         <div class="wrapper">
-            <img src="{{ STATIC_URL }}gfx/dlogo.png">
-            <span>do you live it?</span>
+
+            <span>Welcome to your <a href="/">DaddyHood.me!</a></span>
             {% block login %}
             <a href="/">Home</a>
             <a href="/users/">DH users</a>
             <a href="/users/{{ username }}">My Profile</a>
             <a href="/notes">Public Notes</a>
             <a href="/contact">Need Help!</a>
-            <a href="/map">What's around you?</a> 
+            <a href="/map">What's around you?</a>
             <form action="/logout">
                 <input type="submit" id="btnLogOut" value="Log Out">
             </form>
@@ -39,21 +76,58 @@
             {% endif %}
             {% endblock %}
 
-            {% block content %}
-
-            {% endblock %}
+{% block content %}
+{% endblock %}
         </div>
     </div>
     <footer>
         <div class="wrapper">
             DaddyHood - The only resource you need
             <a href="http://rocket-space.com/rocketu/">
-                <img src="{{ STATIC_URL }}gfx/duck.png">
+                <img src="/static/gfx/duck.png">
             </a>
             <a href="http://www.djangoproject.com/">
                 <img src="https://www.djangoproject.com/s/img/badges/djangomade124x25_grey.gif"  border="0" alt="Made with Django." title="Made with Django." />
             </a>
-        </div>
+
+
+<!-- Twitter Share
+================================================== -->
+    <li class="socials"><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+
+<!-- Facebook Like
+================================================== -->  
+    <li class="socials"><div class="fb-like" data-send="false" data-width="150" data-show-faces="true"></div></li>
+            <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Google Plus
+================================================== -->                
+    <li class="socials"><!-- Place this tag where you want the +1 button to render -->
+    <g:plusone annotation="inline" width="150"></g:plusone></li>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+            
+            <!--
+            {% load socialaccount %}
+            <a href="{% url 'account_signup' %}">Sign Up</a>
+            <a href="{% url 'account_login' %}">Log in</a>
+            <a href=“{% provider_login_url 'facebook' method='oauth2' %}">Sign Up  / Login with Facebook</a>
+        -->
+            </div>
+     
     </footer>
 </body>
 </html>

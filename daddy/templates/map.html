@@ -1,15 +1,24 @@
-<!-- trying to add map from http://jsfiddle.net/doktormolle/C5ZtK/ -->
-<!DOCTYPE html>
 {% extends "base.html" %}
-<html>
-<head>
-	<script src="{{ STATIC_URL }}map.js"></script>
-	<script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
-</head>    
-<body>    
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
+{% block js_files %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBarCpa_MJ_XLduLwBae4860F7iiE4U93M&sensor=true&libraries=places"></script>
+<script type="text/javascript" src='/static/js/daddymap.js'></script>
+{% endblock %}
 
-    <div id="map"></div>
-</body>
+{% block content %}
 
-</html>
+    <div id="content" class="page-content">
+        <div class="page-header">
+            <h3>Our DaddyHood Map shows you exactly where you are to help find where to go!</h3>
+
+        
+        <div class="seven columns" id="sidebar">
+            <div class="widget">
+                <h5 class="widget-title"></h5>
+                <div id="map" style="height: 450px;"></div>
+                <div id="directions"></div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+{% endblock %}

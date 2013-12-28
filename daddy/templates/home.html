@@ -1,28 +1,56 @@
 {% extends "base.html" %}
+{% block js_files %}
+<script type="text/javascript" src='/static/js/fbdaddy.js'></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+{% endblock %}
 
 {% block login %}
     <form action="/login" method="post">{% csrf_token %}
         {% for field in auth_form %}
         {{ field }}
         {% endfor %}
-        <input type="submit" id="btnLogIn" value="Log In">
+        <input type="submit" id="btnLogIn" value="LOG IN">
     </form>
 {% endblock %}
 
 
 {% block content %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=428182520642699";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
-<img src="{{ STATIC_URL}}gfx/dhlogo.png">
+<img src="/static/gfx/mainlogo.png">
 <div class="panel right">
-    <h1>New to DaddyHood?</h1>
+    <h1>New Daddy? Sign up!</h1>
     <p>
         <form action="/signup" method="post">{% csrf_token %}
             {% for field in user_form %}
             {{ field }}
             {% endfor %}
-            <input type="submit" value="Create Account">
+            <input type="submit" value="CREATE MY ACCOUNT">
         </form>
-    </p>
-    
+</div>
+<div class="container">
+    <div class>
+        <div>
+            <div>
+                <h3>We will help you connect with other fathers through Facebook.</h3>
+                <h3>Go for it and give it a shot!</h3>
+            </div>
+        </div>
+    </div>
+    <div class="six columns offset-by-four" id="main">
+        <div id="login-box">
+            <ul>
+                <li><fb:login-button size="large" show-faces="true" width="120" perms="user_likes, friends_likes" max-rows="5">Connect with Facebook</fb:login-button></li>
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

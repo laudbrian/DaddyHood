@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Daddy POI Map</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBarCpa_MJ_XLduLwBae4860F7iiE4U93M&sensor=true&libraries=places"></script>
+<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var poiAddress = "225 Bush Street, San Francisco, USA";
+var poiHTML = '<h2> RocketSpace, San Francisco</h2>';
+    var poiZoomLevel = 15;
+    </script>
+<script type="text/javascript" src='/static/js/poi.js'></script>
+<style>
+h1 {color: #fff; float: left; position: relative; top: -15px; left: 10px}
+
+.description {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: normal;
+    letter-spacing: normal;
+    line-height: 1.3em;
+}
+
+html body { width: 100%; height: 100%; padding: 0px; margin: 0px;  font-family: arial; font-size: 10px; color: #333; background-color: #fcfcfc; }
+
+</style>
+
+
+</head>
+
+<body>
+
+<div id="container">
+    <div id="poiBox">
+      <div id="sidebar">
+        <ul id="poiList">
+          <li title="" id="user" data-title="user">POI Search</li>
+          <li class="" data-title="bakery" id="bread">Bakery</li>
+          <li class="hidden" data-title="dentist" id="dentist">Dentist</li>
+          <li class="" data-title="doctor" id="doctor">Doctors</li>
+          <li class="hidden" data-title="university" id="university">University</li>
+          <li class="hidden" data-title="bank" id="bank">Bank</li>
+          <li class="" data-title="police" id="police">Police</li>
+          <li class="hidden" data-title="establishment" id="computers" name="computer">Computer Store</li>
+          <li class="hidden" data-title="gym" id="gym">Fitness</li>
+          <li data-title="food" id="pizza" name="pizza">Pizza</li>
+          <li class="hidden" data-title="establishment" id="church" name="catholic">Catholic Churches</li>
+          <li class="hidden" data-title="playground" id="playground">Playgrounds</li>
+
+
+        </ul>
+      </div>
+<img src="/static/gfx/dlogo.png" alt="Code written by">
+
+      <div id="map"></div>
+    </div>
+</div>
+
+<div style="width: 800px; margin: 0 auto; clear: both" class="description">
+  <div style="width: 580px; margin: 0 auto; float: left">
+    <h2>Google Maps API Version 3 and Google Places API</h2>
+    <h2>Database Driven Layers</h2>
+    <p>You can add your own markers from your own
+      database. Each marker contains your own title and HTML for the popup info
+      window. Each database group has a default marker icon, or you can define
+      an individual icon per poi point. In this example, the Parking and Playground
+      markers are database driven with a standard marker for each group.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet/less" href="{{ STATIC_URL }}style.less">
-    <script src="{{ STATIC_URL }}less.js"></script>
+    <link rel="stylesheet/less" href="/static/style.less">
+    <script src="/static/less.js"></script>
 </head>
     <header>
         <div class="wrapper">
-            <img src="{{ STATIC_URL }}gfx/dlogo.png">
-            <span>do you live it?</span>
+            <span>Reach out to <a href="/">DaddyHood!</a></span>
             {% block login %}
             <a href="/">Home</a>
             <a href="/users/">Public Dads</a>
             <a href="/users/{{ username }}">My Profile</a>
             <a href="/notes">Public Notes</a>
+            <a href="/map">What's around you?</a> 
             <form action="/logout">
                 <input type="submit" id="btnLogOut" value="Log Out">
             </form>

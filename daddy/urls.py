@@ -2,8 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('django.contrib.staticfiles.views',
-    url(r'^static/(?P<path>.*)$', 'serve'),
+urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'daddy_app.views.index'), # root
     url(r'^login$', 'daddy_app.views.login_view'), # login

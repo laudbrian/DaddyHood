@@ -103,7 +103,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.weibo',
     'south',
     'daddy_app',
-    'boto',
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -129,18 +128,20 @@ WSGI_APPLICATION = 'daddy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-import os 
- 
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+LOGIN_URL = '/'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['RDS_DB_NAME'],
-        'USER': os.environ['RDS_USERNAME'],
-        'PASSWORD': os.environ['RDS_PASSWORD'],
-        'HOST': os.environ['RDS_HOSTNAME'],
-        'PORT': os.environ['RDS_PORT'],
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(PROJECT_PATH, 'database.db'),                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -178,10 +179,3 @@ STATICFILES_FINDERS = (
 
 )
 
-# Set Django's database settings to Heroku's environment variable DATABASE_URL or
-# default to Sqlite if unable to find
-import os
-import dj_database_url
-basedir = os.path.abspath(os.path.dirname(__file__))
-DATABASES['default'] = dj_database_url.config(default=os.environ.get(
-    "DATABASE_URL", "sqlite:///" + os.path.join(basedir, "database.db")))

@@ -7,7 +7,6 @@ Social Networking tool for fathers powered by [Python](http://www.python.org/), 
 This is a Django project I created for my RocketU bootcamp final demo day. You can play with my web application by following the instructions below:
 
 
-  ![DaddyHood screenshot](http://www.brianlau.me/b/images/mainlogo.png) 
 
 ## Setup
 
